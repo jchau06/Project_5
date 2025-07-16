@@ -2,31 +2,32 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import Header from './components/Header.jsx'
 import Card from './components/Card.jsx'
-import getAllBreweries from './functions/search_all.js'
-import groupBy from './functions/groupBy.js'
+import List from './components/List.jsx'
+// import getAllBreweries from './functions/search_all.js'
+// import groupBy from './functions/groupBy.js'
 
 function App() {
 
-  const [breweriesLength, setBreweriesLength] = useState(0);
-  const [allBreweries, setAllBreweries] = useState([]);
+  // const [breweriesLength, setBreweriesLength] = useState(0);
+  // const [allBreweries, setAllBreweries] = useState([]);
 
-  useEffect(() => {
-    getAllBreweries().then(breweries => {
-      setAllBreweries(breweries);
-      setBreweriesLength(breweries.length);
-      console.log(`Total breweries: ${breweries.length}`);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getAllBreweries().then(breweries => {
+  //     setAllBreweries(breweries);
+  //     setBreweriesLength(breweries.length);
+  //     console.log(`Total breweries: ${breweries.length}`);
+  //   });
+  // }, []);
 
-  const breweriesByName = groupBy(allBreweries, 'name');
-  let mostCommonName = '';
-  let maxCount = 0;
-  for (const [name, breweries] of Object.entries(breweriesByName)) {
-    if (breweries.length > maxCount) {
-      mostCommonName = name;
-      maxCount = breweries.length;
-    }
-  }
+  // const breweriesByName = groupBy(allBreweries, 'name');
+  // let mostCommonName = '';
+  // let maxCount = 0;
+  // for (const [name, breweries] of Object.entries(breweriesByName)) {
+  //   if (breweries.length > maxCount) {
+  //     mostCommonName = name;
+  //     maxCount = breweries.length;
+  //   }
+  // }
 
 
   return (
@@ -35,16 +36,19 @@ function App() {
       <div className='card-grid'>
         <Card
           cardAttribute='Total Breweries in the U.S'
-          data={breweriesLength}
+          data='8393'
         />
           <Card
-            cardAttribute='Brewery with Most Locations'
-            data={mostCommonName}
+            cardAttribute='State with Most Breweries'
+            data='California'
           />
         <Card
           cardAttribute='Average Breweries per State'
-          data={Math.floor(breweriesLength / 50)}
+          data='167'
         />
+      </div>
+      <div className='brewery-list'>
+        <List/>
       </div>
     </div>
   )
